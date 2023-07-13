@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hexa_app/models/teams_model.dart';
 
-const List<String> list = <String>['One', 'Two', 'Three', 'Four'];
-
 class CustomDropdownButton extends StatefulWidget {
+  final bool? individual;
+  final String? hintText;
   final String? value;
   final void Function(String?)? onchanged;
   final List<TeamsModel>? teams;
@@ -12,6 +12,8 @@ class CustomDropdownButton extends StatefulWidget {
     required this.teams,
     this.onchanged,
     this.value,
+    this.hintText,
+    this.individual,
   });
 
   @override
@@ -25,7 +27,7 @@ class _CustomDropdownButtonState extends State<CustomDropdownButton> {
   Widget build(BuildContext context) {
     return DropdownButtonFormField<String>(
       isDense: true,
-      hint: const Text("Selecciona equipo"),
+      hint: Text("Equipo: ${widget.hintText}" ?? "Selecciona equipo"),
       //dropdownValue,
       icon: const Icon(Icons.arrow_downward),
       elevation: 16,
@@ -33,6 +35,9 @@ class _CustomDropdownButtonState extends State<CustomDropdownButton> {
       validator: (value) {
         if ((value == null)) {
           return "Campo obligatorio";
+        }
+        if (value == widget.hintText) {
+          return "El nuevo valor no puede ser idéntico al actual";
         }
 
         return null;

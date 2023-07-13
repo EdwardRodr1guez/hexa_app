@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:hexa_app/models/players_model.dart';
@@ -21,12 +19,19 @@ class PlayersService extends ChangeNotifier {
 
   Future<bool> postPlayer(Map data) async {
     try {
-      Response response = await dio.post("/jugadores", data: data);
-      log(true.toString());
+      await dio.post("/jugadores", data: data);
       return true;
     } catch (error) {
-      log(false.toString());
-      print("Error: $error");
+      return false;
+    }
+  }
+
+  Future<bool> updatePlayer(Map data) async {
+    try {
+      await dio.put("/jugadores", data: data);
+      return true;
+    } catch (error) {
+      print(error);
       return false;
     }
   }
