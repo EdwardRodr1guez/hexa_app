@@ -26,7 +26,7 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      obscureText: showObscure == true ? false : true,
+      obscureText: showObscure == true ? false : false,
       controller: controller,
       inputFormatters: inputFormatters,
       maxLength: maxLength,
